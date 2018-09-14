@@ -15,6 +15,10 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
+    const divStyle = {
+      backgroundColor: "navy"
+    };
+
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -62,7 +66,10 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+      <nav
+        className="navbar navbar-expand-sm navbar-dark mb-4"
+        style={divStyle}
+      >
         <div className="container">
           <Link className="navbar-brand" to="/">
             PKUP
@@ -81,7 +88,7 @@ class Navbar extends Component {
               <li className="nav-item">
                 <Link className="nav-link" to="/profiles">
                   {" "}
-                  Developers
+                  Players
                 </Link>
               </li>
             </ul>
