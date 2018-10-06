@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import { addPost } from '../../actions/postActions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
+import { addPost } from "../../actions/postActions";
 
 class PostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      text: "",
+      location: "",
+      time: "",
       errors: {}
     };
 
@@ -29,12 +31,16 @@ class PostForm extends Component {
 
     const newPost = {
       text: this.state.text,
+      location: this.state.location,
+      time: this.state.time,
       name: user.name,
       avatar: user.avatar
     };
 
     this.props.addPost(newPost);
-    this.setState({ text: '' });
+    this.setState({ text: "" });
+    this.setState({ location: "" });
+    this.setState({ time: "" });
   }
 
   onChange(e) {
@@ -52,11 +58,27 @@ class PostForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Create a post"
+                  placeholder="What game do you want to play?"
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
+                />
+
+                <TextAreaFieldGroup
+                  placeholder="Location"
+                  name="location"
+                  value={this.state.location}
+                  onChange={this.onChange}
+                  error={errors.location}
+                />
+
+                <TextAreaFieldGroup
+                  placeholder="Time"
+                  name="time"
+                  value={this.state.time}
+                  onChange={this.onChange}
+                  error={errors.time}
                 />
               </div>
               <button type="submit" className="btn btn-dark">
@@ -81,4 +103,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(
+  mapStateToProps,
+  { addPost }
+)(PostForm);
